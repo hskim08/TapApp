@@ -15,8 +15,8 @@
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
  
- The authors encourage users of MoMu to include this copyright notice,
- and to let us know that you are using MoMu. Any person wishing to 
+ The authors encourage users of TapApp to include this copyright notice,
+ and to let us know that you are using TapApp. Any person wishing to 
  distribute modifications to the Software is encouraged to send the 
  modifications to the original authors so that they can be incorporated 
  into the canonical version.

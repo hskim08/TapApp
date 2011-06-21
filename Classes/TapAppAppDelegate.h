@@ -9,14 +9,14 @@ This code is distributed under the following BSD style open source license:
 
 Permission is hereby granted, free of charge, to any person obtaining a 
 copy of this software and associated documentation files (the
-                                                          "Software"), to deal in the Software without restriction, including
+"Software"), to deal in the Software without restriction, including
 without limitation the rights to use, copy, modify, merge, publish,
 distribute, sublicense, and/or sell copies of the Software, and to
 permit persons to whom the Software is furnished to do so, subject to
 the following conditions:
 
-The authors encourage users of MoMu to include this copyright notice,
-and to let us know that you are using MoMu. Any person wishing to 
+The authors encourage users of TapApp to include this copyright notice,
+and to let us know that you are using TapApp. Any person wishing to 
 distribute modifications to the Software is encouraged to send the 
 modifications to the original authors so that they can be incorporated 
 into the canonical version.

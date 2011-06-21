@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xml>
-    <filename>anAudioFile.wav</filename>
-    <filename>theNextAudioFile.wav</filename>
+    <filename>theFirstFile.wav</filename>
+    <filename>theSecondFile.wav</filename>
 </xml>

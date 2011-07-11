@@ -18,12 +18,13 @@
 		501E4C001380953B00AE48F0 /* FileRead.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 501E4BFE1380953B00AE48F0 /* FileRead.cpp */; };
 		501E4C011380953B00AE48F0 /* FileWvIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 501E4BFF1380953B00AE48F0 /* FileWvIn.cpp */; };
 		5045BC0E138345340086824F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5045BC0D138345340086824F /* Settings.bundle */; };
-		5045F5CE13AAF3BB00FBA46D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5045F5CD13AAF3BB00FBA46D /* Default@2x.png */; };
-		50A7431513AA7946008F1170 /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A7431413AA7946008F1170 /* icon57.png */; };
-		50A7431813AA7951008F1170 /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A7431713AA7951008F1170 /* icon114.png */; };
-		50A7431A13AA7BE0008F1170 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A7431913AA7BE0008F1170 /* Default.png */; };
 		50ADEBBC1381ABE1008AFA96 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 50ADEBBA1381ABE1008AFA96 /* pause.png */; };
 		50ADEBBD1381ABE1008AFA96 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 50ADEBBB1381ABE1008AFA96 /* play.png */; };
+		50E0ED0313C5029B00D991F3 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 50E0ECFE13C5029B00D991F3 /* iTunesArtwork */; };
+		50E0ED0513C502C300D991F3 /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E0ED0413C502C300D991F3 /* icon57.png */; };
+		50E0ED0713C502E800D991F3 /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E0ED0613C502E800D991F3 /* icon114.png */; };
+		50E0ED0913C502F900D991F3 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E0ED0813C502F900D991F3 /* Default.png */; };
+		50E0ED0B13C5030300D991F3 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50E0ED0A13C5030300D991F3 /* Default@2x.png */; };
 		50FF29411371E7DC003FF49E /* FileWrite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50FF293F1371E7DC003FF49E /* FileWrite.cpp */; };
 		50FF29421371E7DC003FF49E /* FileWvOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50FF29401371E7DC003FF49E /* FileWvOut.cpp */; };
 		50FF29471371E8BE003FF49E /* AudioEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 50FF29451371E8BE003FF49E /* AudioEngine.mm */; };
@@ -53,12 +54,13 @@
 		501E4BFE1380953B00AE48F0 /* FileRead.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileRead.cpp; sourceTree = "<group>"; };
 		501E4BFF1380953B00AE48F0 /* FileWvIn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileWvIn.cpp; sourceTree = "<group>"; };
 		5045BC0D138345340086824F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = SOURCE_ROOT; };
-		5045F5CD13AAF3BB00FBA46D /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		50A7431413AA7946008F1170 /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57.png; sourceTree = "<group>"; };
-		50A7431713AA7951008F1170 /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
-		50A7431913AA7BE0008F1170 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		50ADEBBA1381ABE1008AFA96 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		50ADEBBB1381ABE1008AFA96 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		50E0ECFE13C5029B00D991F3 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Resources/images/iTunesArtwork; sourceTree = "<group>"; };
+		50E0ED0413C502C300D991F3 /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57.png; sourceTree = "<group>"; };
+		50E0ED0613C502E800D991F3 /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
+		50E0ED0813C502F900D991F3 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		50E0ED0A13C5030300D991F3 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		50FF293D1371E7B7003FF49E /* FileWvOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileWvOut.h; sourceTree = "<group>"; };
 		50FF293E1371E7C8003FF49E /* WvOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WvOut.h; sourceTree = "<group>"; };
 		50FF293F1371E7DC003FF49E /* FileWrite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileWrite.cpp; sourceTree = "<group>"; };
@@ -118,10 +120,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				5045F5CD13AAF3BB00FBA46D /* Default@2x.png */,
-				50A7431913AA7BE0008F1170 /* Default.png */,
-				50A7431713AA7951008F1170 /* icon114.png */,
-				50A7431413AA7946008F1170 /* icon57.png */,
 				50FF293A1371E771003FF49E /* Ext */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -144,6 +142,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				50E0ECF113C5025C00D991F3 /* images */,
 				5045BC0D138345340086824F /* Settings.bundle */,
 				50ADEBBA1381ABE1008AFA96 /* pause.png */,
 				50ADEBBB1381ABE1008AFA96 /* play.png */,
@@ -164,6 +163,18 @@
 				B39059D012FA95B4002A41E8 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		50E0ECF113C5025C00D991F3 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				50E0ED0A13C5030300D991F3 /* Default@2x.png */,
+				50E0ED0813C502F900D991F3 /* Default.png */,
+				50E0ED0613C502E800D991F3 /* icon114.png */,
+				50E0ED0413C502C300D991F3 /* icon57.png */,
+				50E0ECFE13C5029B00D991F3 /* iTunesArtwork */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 		50FF293A1371E771003FF49E /* Ext */ = {
@@ -261,10 +272,11 @@
 				50ADEBBC1381ABE1008AFA96 /* pause.png in Resources */,
 				50ADEBBD1381ABE1008AFA96 /* play.png in Resources */,
 				5045BC0E138345340086824F /* Settings.bundle in Resources */,
-				50A7431513AA7946008F1170 /* icon57.png in Resources */,
-				50A7431813AA7951008F1170 /* icon114.png in Resources */,
-				50A7431A13AA7BE0008F1170 /* Default.png in Resources */,
-				5045F5CE13AAF3BB00FBA46D /* Default@2x.png in Resources */,
+				50E0ED0313C5029B00D991F3 /* iTunesArtwork in Resources */,
+				50E0ED0513C502C300D991F3 /* icon57.png in Resources */,
+				50E0ED0713C502E800D991F3 /* icon114.png in Resources */,
+				50E0ED0913C502F900D991F3 /* Default.png in Resources */,
+				50E0ED0B13C5030300D991F3 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,14 +308,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hyung-Suk Kim (4MAAJT4KJN)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TapApp_Prefix.pch;
 				INFOPLIST_FILE = "TapApp-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = TapApp;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FDCAC042-A535-4481-BB02-3F72B06DD5FD";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -312,12 +326,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hyung-Suk Kim (4MAAJT4KJN)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TapApp_Prefix.pch;
 				INFOPLIST_FILE = "TapApp-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = TapApp;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FDCAC042-A535-4481-BB02-3F72B06DD5FD";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};

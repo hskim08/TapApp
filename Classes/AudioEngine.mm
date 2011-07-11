@@ -34,7 +34,7 @@
 
 #include "mo_audio.h"
 
-int AudioEngine::FRAME_SIZE = 1024; // adjust value if necessary
+int AudioEngine::FRAME_SIZE = 4096; // adjust value if necessary
 int AudioEngine::SAMPLE_RATE = 44100;
 int AudioEngine::NUM_CHANNELS = 2;
 
@@ -51,6 +51,9 @@ AudioEngine::AudioEngine()
 // destructor
 AudioEngine::~AudioEngine()
 {
+    if(_viewController != NULL) [_viewController release];
+    if( _waveReader != NULL ) delete _waveReader;
+    if( _waveWriter != NULL ) delete _waveWriter;
 }
 
 // late initialization
@@ -136,6 +139,8 @@ float AudioEngine::getElapsedTime()
 // handles the callback function. the actual work is done here.
 void AudioEngine::handleCallback( Float32* buffer, UInt32 numFrames )
 {
+    if( _waveWriter == NULL || _waveReader == NULL ) return;
+    
 	for( int i = 0; i < numFrames; i++ )
 	{
         if( _isTaskRunning )

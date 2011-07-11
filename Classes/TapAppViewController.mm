@@ -46,10 +46,10 @@ std::string _tapData;
 // the audio engine
 AudioEngine _audioEngine;
 
-
 // private interface
 @interface TapAppViewController ()
 
+- (void) createEmptyXml;
 - (BOOL) parseTrackList;
 - (BOOL) checkTrackListChange;
 - (BOOL) validateTrackList;
@@ -68,7 +68,6 @@ AudioEngine _audioEngine;
 
 @end
 
-
 @implementation TapAppViewController
 
 @synthesize navigationBar;
@@ -77,6 +76,9 @@ AudioEngine _audioEngine;
 @synthesize kbToolbar;
 @synthesize doneButton;
 @synthesize cancelButton;
+
+@synthesize playImage;
+@synthesize pauseImage;
 
 @synthesize _documentsDirectory;
 
@@ -109,8 +111,11 @@ AudioEngine _audioEngine;
 - (void) awakeFromNib
 {
     // load images for play/pause button
-	playImage = [[UIImage imageNamed:@"play.png"] retain];
-	pauseImage = [[UIImage imageNamed:@"pause.png"] retain];
+    playImage = [UIImage imageNamed:@"play.png"];
+    [playImage retain];
+    
+	pauseImage = [UIImage imageNamed:@"pause.png"];
+    [pauseImage retain];
 }
 
 
@@ -163,11 +168,21 @@ AudioEngine _audioEngine;
 
 
 - (void)dealloc {
+    [_documentsDirectory release];
     [super dealloc];
 }
 
 
 #pragma mark private_methods
+
+- (void) createEmptyXml
+{
+    NSString* filePath = [NSString stringWithFormat:@"%@/%@", _documentsDirectory, @"trackList.xml"];
+    
+    NSString* xmlString = @"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<xml>\n</xml>";
+    
+    [xmlString writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+}
 
 // checks for trackList.xml and parses it
 - (BOOL) parseTrackList
@@ -176,8 +191,15 @@ AudioEngine _audioEngine;
     NSString* filePath = [NSString stringWithFormat:@"%@/%@", _documentsDirectory, @"trackList.xml"];
     NSURL* fileURL = [[NSURL alloc] initFileURLWithPath:filePath];
     
+    if( ![[NSFileManager defaultManager] fileExistsAtPath:filePath] )
+    {
+        // create trackList.xml
+        [self createEmptyXml];
+    }
+    
     // create parser
-    NSXMLParser* xmlParser = [[NSXMLParser alloc] initWithContentsOfURL:fileURL];
+    NSData *xml = [NSData dataWithContentsOfURL:fileURL];            
+    NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:xml];
     [xmlParser setDelegate:self];
     
     // prepare parsing to _tempList
@@ -569,7 +591,7 @@ AudioEngine _audioEngine;
 
 - (IBAction) handleNextButton:(id)sender
 {
-    if( !_isLoaded || _userID == 0 ) return;
+    if( !_isLoaded || _userID == 0 || _trackList.size() == 0 ) return;
 	if( _taskID >= _trackList.size() - 1 ) return; // don't do anything on last task
     
 	// reset flags
@@ -585,7 +607,7 @@ AudioEngine _audioEngine;
 
 - (IBAction) handlePrevButton:(id)sender
 {
-    if( !_isLoaded || _userID == 0 ) return;
+    if( !_isLoaded || _userID == 0 || _trackList.size() == 0 ) return;
 	if( _taskID < 1 ) return; // don't do anything on first task
 	
 	// reset flags

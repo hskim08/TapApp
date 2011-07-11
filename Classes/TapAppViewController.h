@@ -64,6 +64,9 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem* doneButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem* cancelButton;
 
+@property (nonatomic, retain) UIImage* playImage;
+@property (nonatomic, retain) UIImage* pauseImage;
+
 @property (nonatomic, retain) NSString* _documentsDirectory;
 
 - (void) handleTrackEnded;

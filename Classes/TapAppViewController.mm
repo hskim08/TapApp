@@ -146,7 +146,9 @@ AudioEngine _audioEngine;
         if( [self validateTrackList] ) 
         {
             _isLoaded = YES;
-            navigationBar.topItem.title = @"Enter User ID";
+            
+            if( _trackList.size() == 0 ) navigationBar.topItem.title = @"Add Tracks to Tracklist";
+            else navigationBar.topItem.title = @"Enter User ID";
         }
     }
     else navigationBar.topItem.title = @"XML File Error";

@@ -137,6 +137,20 @@ AudioEngine _audioEngine;
 	_documentsDirectory = [paths objectAtIndex:0];
     [_documentsDirectory retain];
     
+    // create data directory
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    _dataDirectory = [NSString stringWithFormat:@"%@/%@", _documentsDirectory, @"data"];
+    [_dataDirectory retain];
+    
+    BOOL isDir = YES;
+    if ( ![fileManager fileExistsAtPath:_dataDirectory isDirectory:&isDir] ) {
+        
+        if( ![fileManager createDirectoryAtPath:_dataDirectory withIntermediateDirectories:YES attributes:nil error:nil]) {
+            
+            NSLog(@"Error: Create folder failed");
+        }
+    }
+    
     // check for xml file and parse
     if( [self parseTrackList] ) 
     {
@@ -171,6 +185,7 @@ AudioEngine _audioEngine;
 
 - (void)dealloc {
     [_documentsDirectory release];
+    [_dataDirectory release];
     [super dealloc];
 }
 
@@ -327,7 +342,7 @@ AudioEngine _audioEngine;
     // save to file
     //make a file name to write the data to using the documents directory:
 	NSString* fileName = [NSString stringWithFormat:@"%03d_play_order.txt", userId];
-	NSString* fullName = [NSString stringWithFormat:@"%@/%@", _documentsDirectory, fileName];
+	NSString* fullName = [NSString stringWithFormat:@"%@/%@", _dataDirectory, fileName];
     
     [listString writeToFile:fullName atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
@@ -364,7 +379,7 @@ AudioEngine _audioEngine;
     
     //make a file name to write the data to using the documents directory:
 	NSString* outputFile = [NSString stringWithFormat:@"%03d_%02d.wav", _userID, (_trackNoList.at(_taskID)+1)];
-	NSString* outputFilePath = [NSString stringWithFormat:@"%@/%@", _documentsDirectory, outputFile];
+	NSString* outputFilePath = [NSString stringWithFormat:@"%@/%@", _dataDirectory, outputFile];
     std::string outputUrl( [outputFilePath UTF8String] );
     
     bool result = _audioEngine.loadFiles( trackUrl, outputUrl );
@@ -378,11 +393,10 @@ AudioEngine _audioEngine;
 {
 	// log time stamp
     float ts = _audioEngine.getElapsedTime();
-    NSString* tapData = [NSString stringWithFormat:@"%f", ts];
+    NSString* tapData = [NSString stringWithFormat:@"%f\n", ts];
 //    NSLog(@"time stamp: %f", ts);
     
 	_tapData += [tapData UTF8String];
-	_tapData += "\n";
 }
 
 
@@ -391,7 +405,7 @@ AudioEngine _audioEngine;
 {	
     //make a file name to write the data to using the documents directory:
 	NSString* fileName = [NSString stringWithFormat:@"%03d_%02d.txt", _userID, (_trackNoList.at(_taskID)+1)];
-	NSString* filePath = [NSString stringWithFormat:@"%@/%@", _documentsDirectory, fileName];
+	NSString* filePath = [NSString stringWithFormat:@"%@/%@", _dataDirectory, fileName];
 	
 	//save content to the documents directory
 	NSString* dataString = [NSString stringWithCString:_tapData.c_str() encoding:NSUTF8StringEncoding ];
@@ -414,7 +428,6 @@ AudioEngine _audioEngine;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
     _isLoaded = NO;
     _trackList = _tempList;
     

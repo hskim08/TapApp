@@ -46,6 +46,7 @@
 	UIImage* pauseImage;
     
     NSString* _documentsDirectory;
+    NSString* _dataDirectory;
 	
     BOOL _parseElement;
     

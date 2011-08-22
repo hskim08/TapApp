@@ -319,7 +319,7 @@
 				GCC_PREFIX_HEADER = TapApp_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "TapApp-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = TapApp;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FDCAC042-A535-4481-BB02-3F72B06DD5FD";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -336,7 +336,7 @@
 				GCC_PREFIX_HEADER = TapApp_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "TapApp-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = TapApp;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FDCAC042-A535-4481-BB02-3F72B06DD5FD";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -348,10 +348,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hyung-Suk Kim (4MAAJT4KJN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hyung-Suk Kim (4MAAJT4KJN)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				PROVISIONING_PROFILE = "FDCAC042-A535-4481-BB02-3F72B06DD5FD";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FDCAC042-A535-4481-BB02-3F72B06DD5FD";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -360,11 +363,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hyung-Suk Kim (4MAAJT4KJN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hyung-Suk Kim (4MAAJT4KJN)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "FDCAC042-A535-4481-BB02-3F72B06DD5FD";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FDCAC042-A535-4481-BB02-3F72B06DD5FD";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

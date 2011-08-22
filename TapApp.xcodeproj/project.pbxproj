@@ -311,7 +311,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hyung-Suk Kim (4MAAJT4KJN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -319,9 +319,9 @@
 				GCC_PREFIX_HEADER = TapApp_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "TapApp-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = TapApp;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FDCAC042-A535-4481-BB02-3F72B06DD5FD";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -330,15 +330,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hyung-Suk Kim (4MAAJT4KJN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TapApp_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "TapApp-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = TapApp;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FDCAC042-A535-4481-BB02-3F72B06DD5FD";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -348,13 +348,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hyung-Suk Kim (4MAAJT4KJN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hyung-Suk Kim (4MAAJT4KJN)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Hyung-Suk Kim";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hyung-Suk Kim";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				PROVISIONING_PROFILE = "FDCAC042-A535-4481-BB02-3F72B06DD5FD";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FDCAC042-A535-4481-BB02-3F72B06DD5FD";
+				PROVISIONING_PROFILE = "98FDD8C4-6DA4-4489-9925-31D504A5D5C7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "98FDD8C4-6DA4-4489-9925-31D504A5D5C7";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -363,14 +363,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hyung-Suk Kim (4MAAJT4KJN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hyung-Suk Kim (4MAAJT4KJN)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Hyung-Suk Kim";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hyung-Suk Kim";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "FDCAC042-A535-4481-BB02-3F72B06DD5FD";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FDCAC042-A535-4481-BB02-3F72B06DD5FD";
+				PROVISIONING_PROFILE = "98FDD8C4-6DA4-4489-9925-31D504A5D5C7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "98FDD8C4-6DA4-4489-9925-31D504A5D5C7";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

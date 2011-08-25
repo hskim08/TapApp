@@ -42,6 +42,7 @@ std::vector<std::string> _tempList;
 std::vector<std::string> _trackList;
 std::vector<int> _trackNoList;
 std::string _tapData;
+std::string _pauseData;
 
 // the audio engine
 AudioEngine _audioEngine;
@@ -65,6 +66,11 @@ AudioEngine _audioEngine;
 
 - (void) logTimeStamp;
 - (void) saveLogToFile:(id)sender;
+
+- (void) logPauseTimeStamp;
+- (void) savePauseLogToFile:(id)sender;
+
+- (void) checkForDataDirectory;
 
 @end
 
@@ -131,6 +137,7 @@ AudioEngine _audioEngine;
     
     // clear data
 	_tapData.clear();
+    _pauseData.clear();
     
     // get documents directory
     NSArray* paths = NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask, YES );
@@ -138,18 +145,10 @@ AudioEngine _audioEngine;
     [_documentsDirectory retain];
     
     // create data directory
-    NSFileManager* fileManager = [NSFileManager defaultManager];
     _dataDirectory = [NSString stringWithFormat:@"%@/%@", _documentsDirectory, @"data"];
     [_dataDirectory retain];
     
-    BOOL isDir = YES;
-    if ( ![fileManager fileExistsAtPath:_dataDirectory isDirectory:&isDir] ) {
-        
-        if( ![fileManager createDirectoryAtPath:_dataDirectory withIntermediateDirectories:YES attributes:nil error:nil]) {
-            
-            NSLog(@"Error: Create folder failed");
-        }
-    }
+    [self checkForDataDirectory];
     
     // check for xml file and parse
     if( [self parseTrackList] ) 
@@ -191,6 +190,20 @@ AudioEngine _audioEngine;
 
 
 #pragma mark private_methods
+
+- (void) checkForDataDirectory
+{
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    
+    BOOL isDir = YES;
+    if ( ![fileManager fileExistsAtPath:_dataDirectory isDirectory:&isDir] ) {
+        
+        if( ![fileManager createDirectoryAtPath:_dataDirectory withIntermediateDirectories:YES attributes:nil error:nil]) {
+            
+            NSLog(@"Error: Create folder failed");
+        }
+    }
+}
 
 - (void) createEmptyXml
 {
@@ -363,6 +376,7 @@ AudioEngine _audioEngine;
     
 	// clear data
 	_tapData.clear();
+    _pauseData.clear();
     
     // update UI
     [playButton setImage:playImage forState:UIControlStateNormal];
@@ -399,7 +413,6 @@ AudioEngine _audioEngine;
 	_tapData += [tapData UTF8String];
 }
 
-
 // saves tap data to file.
 - (void) saveLogToFile:(id)sender
 {	
@@ -412,6 +425,29 @@ AudioEngine _audioEngine;
 	[dataString writeToFile:filePath atomically:NO encoding:NSStringEncodingConversionAllowLossy error:nil];
 }
 
+// logs the pause time stamp
+- (void) logPauseTimeStamp
+{
+	// log time stamp
+    float ts = _audioEngine.getElapsedTime();
+    NSString* pauseData = [NSString stringWithFormat:@"%f\n", ts];
+    
+	_pauseData += [pauseData UTF8String];
+}
+
+// saves pause time stamps to file.
+- (void) savePauseLogToFile:(id)sender
+{	
+    if ( _pauseData.length() == 0 ) return;
+    
+    //make a file name to write the data to using the documents directory:
+	NSString* fileName = [NSString stringWithFormat:@"%03d_%02d_pause.txt", _userID, (_trackNoList.at(_taskID)+1)];
+	NSString* filePath = [NSString stringWithFormat:@"%@/%@", _dataDirectory, fileName];
+	
+	//save content to the documents directory
+	NSString* dataString = [NSString stringWithCString:_pauseData.c_str() encoding:NSUTF8StringEncoding ];
+	[dataString writeToFile:filePath atomically:NO encoding:NSStringEncodingConversionAllowLossy error:nil];
+}
 
 #pragma mark UITextFieldDelegate
 
@@ -523,8 +559,9 @@ AudioEngine _audioEngine;
 {
     _isPlaying = false;
     
-    // save to file
+    // save logs to file
     [self performSelectorOnMainThread: @selector(saveLogToFile:) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread: @selector(savePauseLogToFile:) withObject:nil waitUntilDone:YES];
     
     // reset play button
     [self performSelectorOnMainThread: @selector(resetPlayButtonMode:) withObject:nil waitUntilDone:YES];
@@ -588,6 +625,7 @@ AudioEngine _audioEngine;
     {
         if( !_isPaused )
         { // pause track
+            [self logPauseTimeStamp];
             _audioEngine.runTask( false );
             _isPaused = TRUE;
             
@@ -641,6 +679,9 @@ AudioEngine _audioEngine;
     // hide keyboard
     [userIdText resignFirstResponder];
     [UIView animateWithDuration:0.3 animations:^{kbToolbar.transform = CGAffineTransformMakeTranslation(0, 260);}];
+    
+    // check for data directory
+    [self checkForDataDirectory];
     
     // check tracklist
     if( ![self parseTrackList] )

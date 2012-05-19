@@ -36,14 +36,11 @@
 	
     IBOutlet UINavigationBar* navigationBar;
 	IBOutlet UITextField* userIdText;
-    IBOutlet UIButton* playButton;
     
     IBOutlet UIToolbar* kbToolbar;
     IBOutlet UIBarButtonItem* doneButton;
     IBOutlet UIBarButtonItem* cancelButton;
-    
-	UIImage* playImage;
-	UIImage* pauseImage;
+    IBOutlet UIToolbar* toolbar;
     
     NSString* _documentsDirectory;
     NSString* _dataDirectory;
@@ -58,24 +55,30 @@
     int _taskID;
 }
 
-@property (nonatomic, retain) IBOutlet UINavigationBar* navigationBar;
-@property (nonatomic, retain) IBOutlet UITextField* userIdText;
-@property (nonatomic, retain) IBOutlet UIButton* playButton;
-@property (nonatomic, retain) IBOutlet UIToolbar* kbToolbar;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem* doneButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem* cancelButton;
+@property (nonatomic, strong) IBOutlet UINavigationBar* navigationBar;
+@property (nonatomic, strong) IBOutlet UITextField* userIdText;
+@property (nonatomic, strong) IBOutlet UIToolbar* kbToolbar;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem* doneButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem* cancelButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem* playButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem* pauseButton;
 
-@property (nonatomic, retain) UIImage* playImage;
-@property (nonatomic, retain) UIImage* pauseImage;
+@property (nonatomic, strong) IBOutlet UIToolbar* toolbar;
 
-@property (nonatomic, retain) NSString* _documentsDirectory;
+@property (nonatomic, strong) NSString* _documentsDirectory;
+@property (nonatomic, strong) NSMutableArray* playArray;
+@property (nonatomic, strong) NSMutableArray* pauseArray;
 
 - (void) handleTrackEnded;
 
 - (IBAction) handleTapButton:(id)sender;
-- (IBAction) handleStartButton:(id)sender;
+
+- (IBAction) handlePlayButton:(id)sender;
+- (IBAction) handlePauseButton:(id)sender;
+
 - (IBAction) handleNextButton:(id)sender;
 - (IBAction) handlePrevButton:(id)sender;
+
 - (IBAction) handleDoneButton:(id)sender;
 - (IBAction) handleCancelButton:(id)sender;
 

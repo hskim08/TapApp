@@ -43,12 +43,16 @@ std::vector<std::string> _trackList;
 std::vector<int> _trackNoList;
 std::string _tapData;
 std::string _pauseData;
+double _startTime = 0;
 
 // the audio engine
 AudioEngine _audioEngine;
 
 // private interface
 @interface TapAppViewController ()
+
+- (void)createToolBarArrays;
+- (void)changeButtonToPlay:(BOOL)play;
 
 - (void) createEmptyXml;
 - (BOOL) parseTrackList;
@@ -78,13 +82,14 @@ AudioEngine _audioEngine;
 
 @synthesize navigationBar;
 @synthesize userIdText;
-@synthesize playButton;
 @synthesize kbToolbar;
 @synthesize doneButton;
 @synthesize cancelButton;
+@synthesize playButton;
+@synthesize pauseButton;
 
-@synthesize playImage;
-@synthesize pauseImage;
+@synthesize toolbar;
+@synthesize playArray, pauseArray;
 
 @synthesize _documentsDirectory;
 
@@ -116,18 +121,16 @@ AudioEngine _audioEngine;
 
 - (void) awakeFromNib
 {
-    // load images for play/pause button
-    playImage = [UIImage imageNamed:@"play.png"];
-    [playImage retain];
-    
-	pauseImage = [UIImage imageNamed:@"pause.png"];
-    [pauseImage retain];
 }
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
+- (void)viewDidLoad 
+{
     [super viewDidLoad];
+    
+    [self createToolBarArrays];
+    [self changeButtonToPlay:YES];
 	
 	// set textfield delegate
 	userIdText.delegate = self;
@@ -142,11 +145,9 @@ AudioEngine _audioEngine;
     // get documents directory
     NSArray* paths = NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask, YES );
 	_documentsDirectory = [paths objectAtIndex:0];
-    [_documentsDirectory retain];
     
     // create data directory
     _dataDirectory = [NSString stringWithFormat:@"%@/%@", _documentsDirectory, @"data"];
-    [_dataDirectory retain];
     
     [self checkForDataDirectory];
     
@@ -165,6 +166,8 @@ AudioEngine _audioEngine;
         }
     }
     else navigationBar.topItem.title = @"XML File Error";
+    
+    
 }
 
 
@@ -183,13 +186,24 @@ AudioEngine _audioEngine;
 
 
 - (void)dealloc {
-    [_documentsDirectory release];
-    [_dataDirectory release];
-    [super dealloc];
 }
 
 
 #pragma mark private_methods
+
+- (void)createToolBarArrays
+{
+    playArray = [NSMutableArray arrayWithArray:self.toolbar.items];
+    [self.playArray removeObject:pauseButton];
+    
+    pauseArray = [NSMutableArray arrayWithArray:self.toolbar.items];
+    [self.pauseArray removeObject:playButton];
+}
+
+- (void)changeButtonToPlay:(BOOL)play
+{
+    [self.toolbar setItems:play?self.playArray:self.pauseArray];
+}
 
 - (void) checkForDataDirectory
 {
@@ -237,11 +251,7 @@ AudioEngine _audioEngine;
     _tempList.clear();
     
     // parse
-    BOOL parsed = [xmlParser parse];
-    
-    // cleanup
-    [xmlParser release];
-    [fileURL release];  
+    BOOL parsed = [xmlParser parse]; 
     
     return parsed;
 }
@@ -379,7 +389,7 @@ AudioEngine _audioEngine;
     _pauseData.clear();
     
     // update UI
-    [playButton setImage:playImage forState:UIControlStateNormal];
+    [self changeButtonToPlay:YES];
 }
 
 
@@ -407,6 +417,7 @@ AudioEngine _audioEngine;
 {
 	// log time stamp
     float ts = _audioEngine.getElapsedTime();
+//    double ts = [NSDate timeIntervalSinceReferenceDate] - _startTime;
     NSString* tapData = [NSString stringWithFormat:@"%f\n", ts];
 //    NSLog(@"time stamp: %f", ts);
     
@@ -545,7 +556,7 @@ AudioEngine _audioEngine;
 
 - (void) resetPlayButtonMode:(id)object
 {
-    [playButton setImage:playImage forState:UIControlStateNormal];
+    [self changeButtonToPlay:YES];
 }
 
 // this is a workaround
@@ -557,7 +568,7 @@ AudioEngine _audioEngine;
 
 - (void) handleTrackEnded
 {
-    _isPlaying = false;
+    _isPlaying = NO;
     
     // save logs to file
     [self performSelectorOnMainThread: @selector(saveLogToFile:) withObject:nil waitUntilDone:YES];
@@ -571,8 +582,8 @@ AudioEngine _audioEngine;
     
     if( _taskID == _trackList.size() ) 
     {
-        _isPlaying = false;
-        _isPaused = false;
+        _isPlaying = NO;
+        _isPaused = NO;
         
         [self performSelectorOnMainThread: @selector(setTaskLabelText:) withObject:@"Finished!" waitUntilDone:YES];
     }
@@ -582,7 +593,7 @@ AudioEngine _audioEngine;
         NSString* taskTitle = [[NSString alloc] initWithFormat:@"Task# %02d", (_taskID+1)];
         [self performSelectorOnMainThread: @selector(setTaskLabelText:) withObject:taskTitle waitUntilDone:YES];
 
-        [taskTitle release];
+//        [taskTitle release];
     }
 }
 
@@ -596,49 +607,54 @@ AudioEngine _audioEngine;
 	[self logTimeStamp];
 }
 
-
-- (IBAction) handleStartButton:(id)sender
-{	
-	if( !_isPlaying  )
-	{ // start
-        if( _isLoaded && _userID != 0 && _taskID < _trackList.size() )
+- (IBAction) handlePlayButton:(id)sender
+{
+    if ( _isPlaying  ) 
+    {
+        if ( _isPaused ) 
         {
+            _audioEngine.runTask( true );
+            _isPaused = NO;
+            
+            [self changeButtonToPlay:NO];
+        }
+    }
+    else 
+    {
+        if( _isLoaded && _userID != 0 && _taskID < _trackList.size() ) {
+        
             // update task title
             NSString* taskTitle = [NSString stringWithFormat:@"Task# %02d", (_taskID+1)];
             navigationBar.topItem.title = taskTitle;
-
+            
             // reset
             [self reset];
-                    
+            
             // load audio file
             [self loadAudioFile];
             
             // play track
             _audioEngine.runTask( true );
             
-            [playButton setImage:pauseImage forState:UIControlStateNormal];
+            [self changeButtonToPlay:NO];
             
-            _isPlaying = TRUE;
-        }
-	}
-    else
-    {
-        if( !_isPaused )
-        { // pause track
-            [self logPauseTimeStamp];
-            _audioEngine.runTask( false );
-            _isPaused = TRUE;
-            
-            [playButton setImage:playImage forState:UIControlStateNormal];
-        }
-        else
-        {
-            _audioEngine.runTask( true );
-            _isPaused = FALSE;
-            
-            [playButton setImage:pauseImage forState:UIControlStateNormal];
+            _isPlaying = YES;
+            _isPaused = NO;
         }
     }
+}
+
+
+- (IBAction) handlePauseButton:(id)sender
+{
+//    if( !_isPaused ) { // pause track
+        
+        [self logPauseTimeStamp];
+        _audioEngine.runTask( false );
+        _isPaused = YES;
+        
+        [self changeButtonToPlay:YES];
+//    }
 }
 
 
@@ -646,6 +662,9 @@ AudioEngine _audioEngine;
 {
     if( !_isLoaded || _userID == 0 || _trackList.size() == 0 ) return;
 	if( _taskID >= _trackList.size() - 1 ) return; // don't do anything on last task
+    
+    [self performSelectorOnMainThread: @selector(saveLogToFile:) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread: @selector(savePauseLogToFile:) withObject:nil waitUntilDone:YES];
     
 	// reset flags
 	[self reset];
@@ -704,7 +723,7 @@ AudioEngine _audioEngine;
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
-        [alert release];
+//        [alert release];
     }
     else
     {       

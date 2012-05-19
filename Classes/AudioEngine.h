@@ -48,6 +48,8 @@ public:
 public:
     AudioEngine();
     ~AudioEngine();
+    AudioEngine(const AudioEngine& ae);
+    AudioEngine& operator = (const AudioEngine& ae);
     
     bool initialize( TapAppViewController* vc );
     

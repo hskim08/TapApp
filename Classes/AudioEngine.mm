@@ -34,7 +34,7 @@
 
 #include "mo_audio.h"
 
-int AudioEngine::FRAME_SIZE = 4096; // adjust value if necessary
+int AudioEngine::FRAME_SIZE = 512; // adjust value if necessary
 int AudioEngine::SAMPLE_RATE = 44100;
 int AudioEngine::NUM_CHANNELS = 2;
 
@@ -51,9 +51,33 @@ AudioEngine::AudioEngine()
 // destructor
 AudioEngine::~AudioEngine()
 {
-    if(_viewController != NULL) [_viewController release];
+//    if(_viewController != NULL) [_viewController release];
     if( _waveReader != NULL ) delete _waveReader;
     if( _waveWriter != NULL ) delete _waveWriter;
+}
+
+AudioEngine::AudioEngine(const AudioEngine& ae)
+:_waveReader(ae._waveReader)
+,_waveWriter(ae._waveWriter)
+,_isTaskRunning(ae._isTaskRunning)
+,_isTaskPrepared(ae._isTaskPrepared)
+,_viewController(ae._viewController)
+{
+}
+
+
+AudioEngine& AudioEngine::operator = (const AudioEngine& ae)
+{
+    if (this != &ae) // protect against invalid self-assignment
+    {
+        _waveReader = ae._waveReader;
+        _waveWriter = ae._waveWriter;
+        _isTaskRunning = ae._isTaskRunning;
+        _isTaskPrepared = ae._isTaskPrepared;
+        _viewController = ae._viewController;
+    }
+    // by convention, always return *this
+    return *this;
 }
 
 // late initialization
@@ -82,7 +106,7 @@ bool AudioEngine::initialize( TapAppViewController* vc )
     _waveReader = new stk::FileWvIn();
     
     _viewController = vc;
-    [vc retain];
+//    [vc retain];
 
     return true;
 }
